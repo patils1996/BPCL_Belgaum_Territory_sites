@@ -7789,8 +7789,8 @@ function updateKPIs(){
 function initMap(){
   const dark=document.documentElement.getAttribute('data-theme')==='dark';
   S.map=L.map('map-el',{preferCanvas:true}).setView([15.70,75.20],8);
-  L.tileLayer(dark?'https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png':'https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png',
-    {attribution:'© OpenStreetMap © CARTO',subdomains:'abcd',maxZoom:19}).addTo(S.map);
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+    {attribution:'© OpenStreetMap contributors',maxZoom:19}).addTo(S.map);
   S.markerLayer=L.layerGroup().addTo(S.map);
   updateMarkers();
 }
