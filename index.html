@@ -7787,10 +7787,18 @@ function updateKPIs(){
 
 // MAP
 function initMap(){
-  const dark=document.documentElement.getAttribute('data-theme')==='dark';
   S.map=L.map('map-el',{preferCanvas:true}).setView([15.70,75.20],8);
-  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
-    {attribution:'© OpenStreetMap contributors',maxZoom:19}).addTo(S.map);
+  const gRoad=L.tileLayer('https://{s}.google.com/vt/lyrs=m&x={x}&y={y}&z={z}',{
+    maxZoom:20,subdomains:['mt0','mt1','mt2','mt3'],attribution:'&copy; Google Maps'
+  });
+  const gSatellite=L.tileLayer('https://{s}.google.com/vt/lyrs=s,h&x={x}&y={y}&z={z}',{
+    maxZoom:20,subdomains:['mt0','mt1','mt2','mt3'],attribution:'&copy; Google Maps'
+  });
+  const gTerrain=L.tileLayer('https://{s}.google.com/vt/lyrs=p&x={x}&y={y}&z={z}',{
+    maxZoom:20,subdomains:['mt0','mt1','mt2','mt3'],attribution:'&copy; Google Maps'
+  });
+  gRoad.addTo(S.map);
+  L.control.layers({'Google Map':gRoad,'Google Satellite':gSatellite,'Google Terrain':gTerrain},null,{position:'topright'}).addTo(S.map);
   S.markerLayer=L.layerGroup().addTo(S.map);
   updateMarkers();
 }
