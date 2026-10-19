@@ -1,4 +1,4 @@
-const CACHE_NAME = 'clr-bpcl-portal-v1';
+const CACHE_NAME = 'clr-bpcl-portal-v2';
 const ASSETS = [
     './',
     './index.html',
@@ -9,16 +9,15 @@ const ASSETS = [
 
 // Install Event
 self.addEventListener('install', (e) => {
+    self.skipWaiting();
     e.waitUntil(
         caches.open(CACHE_NAME).then((cache) => {
             return cache.addAll(ASSETS);
-        }).then(() => {
-            return self.skipWaiting();
         })
     );
 });
 
-// Activate Event
+// Activate Event - Clean up old cache versions
 self.addEventListener('activate', (e) => {
     e.waitUntil(
         caches.keys().then((keys) => {
@@ -35,8 +34,26 @@ self.addEventListener('activate', (e) => {
     );
 });
 
-// Fetch Event
+// Fetch Event - Network First for HTML, Cache First for assets
 self.addEventListener('fetch', (e) => {
+    const isHtml = e.request.mode === 'navigate' || e.request.url.endsWith('index.html') || e.request.url.endsWith('/');
+    if (isHtml) {
+        e.respondWith(
+            fetch(e.request).then((networkResponse) => {
+                if (networkResponse && networkResponse.status === 200) {
+                    const responseClone = networkResponse.clone();
+                    caches.open(CACHE_NAME).then((cache) => {
+                        cache.put(e.request, responseClone);
+                    });
+                }
+                return networkResponse;
+            }).catch(() => {
+                return caches.match(e.request);
+            })
+        );
+        return;
+    }
+
     e.respondWith(
         caches.match(e.request).then((cachedResponse) => {
             if (cachedResponse) {
