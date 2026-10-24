@@ -1,8 +1,10 @@
-const CACHE_NAME = 'clr-bpcl-portal-v2';
+const CACHE_NAME = 'clr-bpcl-portal-v3';
 const ASSETS = [
     './',
     './index.html',
     './icon.svg',
+    './icon-192.png',
+    './icon-512.png',
     './manifest.json',
     './photos_data.js'
 ];
