@@ -899,6 +899,43 @@ tbody tr:hover{background:var(--surface2)}
 .mk-inner{width:10px;height:10px;border-radius:50%;background:#fff}
 .leaflet-div-icon{background:transparent;border:none}
 
+
+/* NEAREST SITES SECTION & MAP VISUALS */
+.nearest-wrap{margin-top:0;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-l);box-shadow:var(--shadow-s);overflow:hidden;flex-shrink:0}
+.nearest-origin-pill{font-size:11.5px;font-weight:700;padding:3px 12px;border-radius:99px;background:color-mix(in srgb,var(--blue) 12%,transparent);color:var(--blue);border:1px solid color-mix(in srgb,var(--blue) 25%,transparent);display:inline-flex;align-items:center;gap:5px}
+.nearest-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(310px,1fr));gap:16px}
+.nearest-card{background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius-m);padding:16px;display:flex;flex-direction:column;justify-content:space-between;box-shadow:var(--shadow-s);transition:transform .15s ease,box-shadow .15s ease,border-color .15s ease;position:relative;overflow:hidden}
+.nearest-card:hover{transform:translateY(-2px);box-shadow:var(--shadow-m);border-color:var(--blue)}
+.nc-top{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:8px}
+.nc-rank{width:26px;height:26px;border-radius:50%;background:var(--blue);color:#fff;font-size:11.5px;font-weight:800;display:inline-flex;align-items:center;justify-content:center;font-family:'Outfit',sans-serif;flex-shrink:0}
+.nearest-card:first-child .nc-rank{background:var(--orange);box-shadow:0 2px 8px rgba(243,112,33,0.35)}
+.nc-badge{font-size:10px;font-weight:700;padding:2px 8px;border-radius:99px;letter-spacing:.4px}
+.nc-badge-cc{background:rgba(0,84,166,.12);color:var(--blue)}
+.nc-badge-dc{background:rgba(243,112,33,.12);color:var(--orange)}
+.nc-badge-coco{background:rgba(168,85,247,.12);color:#a855f7}
+.nc-dist-badge{display:inline-flex;align-items:center;gap:4px;font-size:11.5px;font-weight:700;color:var(--blue);background:color-mix(in srgb,var(--blue) 10%,transparent);padding:3px 10px;border-radius:99px;border:1px solid color-mix(in srgb,var(--blue) 20%,transparent)}
+.nc-name{font-size:14px;font-weight:800;color:var(--text);line-height:1.35;margin:0 0 10px;font-family:'Outfit',sans-serif}
+.nc-details{display:flex;flex-direction:column;gap:6px;font-size:11.5px;color:var(--text2);margin-bottom:14px}
+.nc-row{display:flex;align-items:flex-start;gap:7px;line-height:1.35}
+.nc-row svg{width:13px;height:13px;color:var(--text3);margin-top:1px;flex-shrink:0}
+.nc-actions{display:flex;align-items:center;gap:8px;flex-wrap:wrap;padding-top:10px;border-top:1px solid var(--border)}
+.nc-btn{display:inline-flex;align-items:center;gap:5px;padding:6px 11px;border-radius:var(--radius-s);font-size:11px;font-weight:700;text-decoration:none;cursor:pointer;border:none;transition:all .15s ease}
+.nc-btn svg{width:12px;height:12px}
+.nc-btn-map{background:var(--blue);color:#fff}
+.nc-btn-map:hover{background:#004080;box-shadow:0 2px 8px rgba(0,84,166,0.3)}
+.nc-btn-drive{background:color-mix(in srgb,var(--orange) 12%,transparent);color:var(--orange);border:1px solid color-mix(in srgb,var(--orange) 25%,transparent)}
+.nc-btn-drive:hover{background:var(--orange);color:#fff}
+.nc-btn-call{background:color-mix(in srgb,var(--green) 12%,transparent);color:var(--green);border:1px solid color-mix(in srgb,var(--green) 25%,transparent)}
+.nc-btn-call:hover{background:var(--green);color:#fff}
+.nc-btn-modal{background:var(--surface);color:var(--text2);border:1px solid var(--border)}
+.nc-btn-modal:hover{background:var(--surface2);color:var(--text);border-color:var(--blue)}
+.pop-nearest-box{background:color-mix(in srgb,var(--blue) 8%,transparent);border-top:1px solid var(--border);padding:8px 14px;display:flex;align-items:center;justify-content:space-between;gap:8px;cursor:pointer;transition:background .15s}
+.pop-nearest-box:hover{background:color-mix(in srgb,var(--blue) 15%,transparent)}
+.pop-nearest-text{font-size:11px;font-weight:700;color:var(--blue);display:flex;align-items:center;gap:5px}
+.pop-nearest-btn-pill{font-size:10px;font-weight:700;padding:3px 9px;border-radius:99px;background:var(--blue);color:#fff;border:none;cursor:pointer;display:inline-flex;align-items:center;gap:3px;box-shadow:0 2px 6px rgba(0,84,166,.25)}
+.nearest-tooltip{background:var(--surface)!important;color:var(--text)!important;border:1px solid var(--border)!important;border-radius:6px!important;padding:4px 8px!important;font-family:'Plus Jakarta Sans',sans-serif!important;font-size:11px!important;box-shadow:var(--shadow-m)!important}
+.nearest-tooltip strong{color:var(--blue)}
+
 /* SALES TRENDS PANEL */
 .trend-toolbar{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}
 .trend-toolbar .sub{font-size:11.5px;color:var(--text2)}
@@ -1328,6 +1365,41 @@ tbody tr:hover{background:var(--surface2)}
           <div class="legend-item"><div class="legend-dot" style="background:#0054A6"></div>CC Outlet</div>
           <div class="legend-item"><div class="legend-dot" style="background:#F37021"></div>DC Outlet</div>
           <div class="legend-item"><div class="legend-dot" style="background:#a855f7"></div>COCO Outlet</div>
+        </div>
+      </div>
+
+      <!-- Nearest 6 Retail Outlets Section -->
+      <div class="tbl-card nearest-wrap" id="nearest-sites-wrap">
+        <div class="tbl-head" style="flex-wrap:wrap;gap:12px;padding:16px 20px;">
+          <div>
+            <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
+              <h2 style="margin:0;font-size:16px;font-weight:800;color:var(--text);display:flex;align-items:center;gap:7px;">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="18" height="18" style="color:var(--blue)"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg>
+                Nearest 6 Retail Outlets
+              </h2>
+              <span class="nearest-origin-pill" id="nearest-origin-pill" style="display:none;"></span>
+            </div>
+            <span class="sub" id="nearest-subtitle" style="display:block;margin-top:4px;font-size:12px;color:var(--text2)">
+              Click any outlet pin on the map above to display its 6 closest retail outlets & distances
+            </span>
+          </div>
+          <div style="display:flex;align-items:center;gap:8px;margin-left:auto">
+            <button class="btn-clear-nearest" id="btn-clear-nearest" onclick="clearNearestSites()" style="display:none;align-items:center;gap:6px;padding:6px 14px;border-radius:var(--radius-s);border:1px solid var(--border);background:var(--surface2);color:var(--text2);font-size:11.5px;font-weight:600;cursor:pointer">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="13" height="13"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+              Clear Selection
+            </button>
+          </div>
+        </div>
+        
+        <div class="nearest-body" id="nearest-body" style="padding:20px;">
+          <div class="nearest-empty" id="nearest-empty" style="text-align:center;padding:36px 20px;color:var(--text3);">
+            <div style="width:52px;height:52px;border-radius:50%;background:color-mix(in srgb,var(--blue) 12%,transparent);color:var(--blue);display:inline-flex;align-items:center;justify-content:center;margin-bottom:12px">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="26" height="26"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            </div>
+            <h4 style="font-size:14px;font-weight:700;color:var(--text);margin-bottom:5px;">Select Any Site Pin on the Map</h4>
+            <p style="font-size:12px;color:var(--text2);max-width:440px;margin:0 auto;line-height:1.5;">When you click on any outlet pin, its 6 nearest retail outlets, driving distances, contact numbers, and turn-by-turn routes will appear here immediately.</p>
+          </div>
+          <div class="nearest-grid" id="nearest-grid" style="display:none;"></div>
         </div>
       </div>
     </section>
@@ -7891,7 +7963,9 @@ function updateMarkers(){
     valid++;
     const color=r.type.toUpperCase()==='DC'?'#F37021':r.type.toUpperCase()==='COCO'?'#a855f7':'#0054A6';
     const mk=L.marker([lat,lng],{icon:pinIcon(color)});
-    mk.bindPopup(`<div class="pop-hd"><h3>${r.outletName}</h3><span class="pop-type">${r.type.toUpperCase()} Outlet</span></div><div class="pop-body"><div class="pop-row"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="13" height="13"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg><span class="pop-label">Location:</span><span class="pop-val">${r.location}</span></div><div class="pop-row"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="13" height="13"><line x1="4" y1="9" x2="20" y2="9"/><line x1="4" y1="15" x2="20" y2="15"/><line x1="10" y1="3" x2="8" y2="21"/><line x1="16" y1="3" x2="14" y2="21"/></svg><span class="pop-label">CC No:</span><span class="pop-val">${r.ccNumber}</span></div><div class="pop-row"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="13" height="13"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg><span class="pop-label">SO:</span><span class="pop-val">${r.soName}</span></div><div class="pop-row"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="13" height="13"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg><span class="pop-label">MST:</span><span class="pop-val">${r.mstName}</span></div>${r.contact?`<div class="pop-row"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="13" height="13"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 2.2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg><span class="pop-label">Contact:</span><span class="pop-val">${r.contact}</span></div>`:''}</div><div class="pop-ft">${r.contact?`<a href="tel:${r.contact}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="12" height="12"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 2.2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>Call</a>`:''}<a href="https://www.google.com/maps/dir/?api=1&destination=${r.latitude},${r.longitude}" target="_blank" style="margin-left:auto"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="12" height="12"><polygon points="3 11 22 2 13 21 11 13 3 11"/></svg>Drive</a></div>`,{maxWidth:290,closeButton:false});
+    mk.bindPopup(`<div class="pop-hd"><h3>${r.outletName}</h3><span class="pop-type">${r.type.toUpperCase()} Outlet</span></div><div class="pop-body"><div class="pop-row"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="13" height="13"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg><span class="pop-label">Location:</span><span class="pop-val">${r.location}</span></div><div class="pop-row"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="13" height="13"><line x1="4" y1="9" x2="20" y2="9"/><line x1="4" y1="15" x2="20" y2="15"/><line x1="10" y1="3" x2="8" y2="21"/><line x1="16" y1="3" x2="14" y2="21"/></svg><span class="pop-label">CC No:</span><span class="pop-val">${r.ccNumber}</span></div><div class="pop-row"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="13" height="13"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg><span class="pop-label">SO:</span><span class="pop-val">${r.soName}</span></div><div class="pop-row"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="13" height="13"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg><span class="pop-label">MST:</span><span class="pop-val">${r.mstName}</span></div>${r.contact?`<div class="pop-row"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="13" height="13"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 2.2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg><span class="pop-label">Contact:</span><span class="pop-val">${r.contact}</span></div>`:''}</div><div class="pop-ft">${r.contact?`<a href="tel:${r.contact}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="12" height="12"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 2.2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>Call</a>`:''}<a href="https://www.google.com/maps/dir/?api=1&destination=${r.latitude},${r.longitude}" target="_blank" style="margin-left:auto"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="12" height="12"><polygon points="3 11 22 2 13 21 11 13 3 11"/></svg>Drive</a></div><div class="pop-nearest-box" onclick="focusNearestSection()" title="View the 6 nearest outlets below"><span class="pop-nearest-text"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="12" height="12"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg>Nearest 6 Sites</span><span class="pop-nearest-btn-pill">View Below &darr;</span></div>`,{maxWidth:290,closeButton:false});
+    mk.on('click', ()=>{ showNearestSites(r); });
+    mk.on('popupopen', ()=>{ showNearestSites(r); });
     S.markerLayer.addLayer(mk);S.markerMap.set(r.slNo,mk);
   });
   document.getElementById('map-counter').textContent=`Showing ${valid} of ${S.filtered.length} outlets`;
@@ -7900,7 +7974,251 @@ window.flyTo=function(slNo,lat,lng){
   switchTab('map');
   if(!S.map){setTimeout(()=>flyTo(slNo,lat,lng),400);return}
   S.map.flyTo([lat,lng],14,{animate:true,duration:1.2});
-  setTimeout(()=>{const mk=S.markerMap.get(slNo);if(mk)mk.openPopup()},1400);
+  setTimeout(()=>{
+    const mk=S.markerMap.get(slNo);
+    if(mk){
+      mk.openPopup();
+      const r=S.all.find(x=>x.slNo===slNo);
+      if(r)showNearestSites(r);
+    }
+  },1400);
+};
+
+// ── NEAREST 6 SITES LOGIC ──
+function haversineDistance(lat1, lon1, lat2, lon2) {
+  const R = 6371; // Earth radius in km
+  const dLat = (lat2 - lat1) * Math.PI / 180;
+  const dLon = (lon2 - lon1) * Math.PI / 180;
+  const a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+            Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) *
+            Math.sin(dLon / 2) * Math.sin(dLon / 2);
+  const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+  return R * c;
+}
+
+function formatDist(dKm) {
+  if (dKm < 1) {
+    return Math.round(dKm * 1000) + ' m';
+  }
+  return dKm.toFixed(1) + ' km';
+}
+
+function escapeHtml(s){
+  if(s===null||s===undefined)return'';
+  return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');
+}
+
+function getNearestSites(target, count) {
+  if (!count) count = 6;
+  const tLat = parseFloat(target.latitude);
+  const tLng = parseFloat(target.longitude);
+  if (!tLat || !tLng || isNaN(tLat) || isNaN(tLng)) return [];
+
+  const list = [];
+  const source = S.all || dealersData;
+  for (let i = 0; i < source.length; i++) {
+    const o = source[i];
+    if (o.slNo === target.slNo) continue;
+    const oLat = parseFloat(o.latitude);
+    const oLng = parseFloat(o.longitude);
+    if (!oLat || !oLng || isNaN(oLat) || isNaN(oLng)) continue;
+    const dist = haversineDistance(tLat, tLng, oLat, oLng);
+    list.push({ outlet: o, distance: dist });
+  }
+  list.sort((a, b) => a.distance - b.distance);
+  return list.slice(0, count);
+}
+
+function showNearestSites(target) {
+  if (!target) return;
+  S.currentNearestTarget = target;
+  
+  const originPill = document.getElementById('nearest-origin-pill');
+  const subtitle = document.getElementById('nearest-subtitle');
+  const clearBtn = document.getElementById('btn-clear-nearest');
+  const emptyState = document.getElementById('nearest-empty');
+  const grid = document.getElementById('nearest-grid');
+  
+  if (!grid) return;
+  
+  const nearest = getNearestSites(target, 6);
+  if (!nearest.length) {
+    if (emptyState) emptyState.style.display = 'block';
+    grid.style.display = 'none';
+    if (subtitle) subtitle.textContent = `Location coordinates not available for ${target.outletName}`;
+    return;
+  }
+  
+  // Update section header
+  if (originPill) {
+    originPill.style.display = 'inline-flex';
+    originPill.innerHTML = `Selected Site: <strong>${escapeHtml(target.outletName)}</strong> <span style="opacity:0.75">(${target.type} • CC: ${target.ccNumber})</span>`;
+  }
+  if (subtitle) {
+    subtitle.innerHTML = `Showing the <strong>6 closest retail outlets</strong> to <strong>${escapeHtml(target.outletName)}</strong>. Closest is <strong>${formatDist(nearest[0].distance)}</strong> away.`;
+  }
+  if (clearBtn) clearBtn.style.display = 'inline-flex';
+  
+  if (emptyState) emptyState.style.display = 'none';
+  grid.style.display = 'grid';
+  
+  const tLat = parseFloat(target.latitude);
+  const tLng = parseFloat(target.longitude);
+  
+  let cardsHtml = '';
+  nearest.forEach((item, idx) => {
+    const o = item.outlet;
+    const distFormatted = formatDist(item.distance);
+    const typeUpper = (o.type || 'CC').toUpperCase();
+    const typeBadgeClass = typeUpper === 'DC' ? 'nc-badge-dc' : (typeUpper === 'COCO' ? 'nc-badge-coco' : 'nc-badge-cc');
+    const oLat = parseFloat(o.latitude);
+    const oLng = parseFloat(o.longitude);
+    const avg = avgSales(o);
+    const avgText = avg !== null ? `${avg.toFixed(0)} KL/mo` : '–';
+    
+    cardsHtml += `
+      <div class="nearest-card">
+        <div>
+          <div class="nc-top">
+            <div style="display:flex;align-items:center;gap:7px;">
+              <span class="nc-rank">#${idx + 1}</span>
+              <span class="nc-badge ${typeBadgeClass}">${typeUpper} Outlet</span>
+            </div>
+            <span class="nc-dist-badge">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="12" height="12"><polygon points="3 11 22 2 13 21 11 13 3 11"/></svg>
+              ${distFormatted} away
+            </span>
+          </div>
+          
+          <h4 class="nc-name" title="${escapeHtml(o.outletName)}">${escapeHtml(o.outletName)}</h4>
+          
+          <div class="nc-details">
+            <div class="nc-row">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="4" y1="9" x2="20" y2="9"/><line x1="4" y1="15" x2="20" y2="15"/><line x1="10" y1="3" x2="8" y2="21"/><line x1="16" y1="3" x2="14" y2="21"/></svg>
+              <span>CC: <strong>${o.ccNumber}</strong> ${o.blCode ? `| BL: ${o.blCode}` : ''} | Avg Sales: <strong>${avgText}</strong></span>
+            </div>
+            <div class="nc-row">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+              <span class="nc-loc" title="${escapeHtml(o.location)}">${escapeHtml(o.location)}</span>
+            </div>
+            <div class="nc-row">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+              <span>District: <strong>${escapeHtml(o.district)}</strong> | SO: ${escapeHtml(o.soName)}</span>
+            </div>
+            ${o.contact ? `
+            <div class="nc-row">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 2.2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+              <span>Contact: <a href="tel:${o.contact}" style="font-weight:700;color:var(--text);">${o.contact}</a></span>
+            </div>` : ''}
+          </div>
+        </div>
+        
+        <div class="nc-actions">
+          <button class="nc-btn nc-btn-map" onclick="focusNearestOnMap(${o.slNo}, ${oLat}, ${oLng})">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            View on Map
+          </button>
+          <a class="nc-btn nc-btn-drive" href="https://www.google.com/maps/dir/?api=1&origin=${tLat},${tLng}&destination=${oLat},${oLng}" target="_blank">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="3 11 22 2 13 21 11 13 3 11"/></svg>
+            Directions
+          </a>
+          ${o.contact ? `
+          <a class="nc-btn nc-btn-call" href="tel:${o.contact}">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 2.2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+            Call
+          </a>` : ''}
+          <button class="nc-btn nc-btn-modal" onclick="openRoModal(${o.slNo})">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>
+            Details
+          </button>
+        </div>
+      </div>
+    `;
+  });
+  grid.innerHTML = cardsHtml;
+  
+  // Render connecting lines on map
+  if (S.map) {
+    if (!S.nearestLineLayer) {
+      S.nearestLineLayer = L.layerGroup().addTo(S.map);
+    }
+    S.nearestLineLayer.clearLayers();
+    
+    nearest.forEach((item, idx) => {
+      const o = item.outlet;
+      const oLat = parseFloat(o.latitude);
+      const oLng = parseFloat(o.longitude);
+      const distFormatted = formatDist(item.distance);
+      const color = o.type.toUpperCase() === 'DC' ? '#F37021' : (o.type.toUpperCase() === 'COCO' ? '#a855f7' : '#0054A6');
+      
+      const line = L.polyline([[tLat, tLng], [oLat, oLng]], {
+        color: color,
+        weight: 2.5,
+        opacity: 0.8,
+        dashArray: '6, 6'
+      });
+      line.bindTooltip(`<strong>#${idx + 1} (${distFormatted})</strong><br>${escapeHtml(o.outletName)}`, {
+        sticky: true,
+        direction: 'top',
+        className: 'nearest-tooltip'
+      });
+      
+      const ring = L.circleMarker([oLat, oLng], {
+        radius: 14,
+        color: color,
+        weight: 2.5,
+        fillColor: color,
+        fillOpacity: 0.2,
+        dashArray: '4, 4'
+      });
+      
+      S.nearestLineLayer.addLayer(line);
+      S.nearestLineLayer.addLayer(ring);
+    });
+  }
+}
+
+function clearNearestSites() {
+  if (S.nearestLineLayer) {
+    S.nearestLineLayer.clearLayers();
+  }
+  const originPill = document.getElementById('nearest-origin-pill');
+  const subtitle = document.getElementById('nearest-subtitle');
+  const clearBtn = document.getElementById('btn-clear-nearest');
+  const emptyState = document.getElementById('nearest-empty');
+  const grid = document.getElementById('nearest-grid');
+  
+  if (originPill) originPill.style.display = 'none';
+  if (clearBtn) clearBtn.style.display = 'none';
+  if (subtitle) subtitle.textContent = 'Click any outlet pin on the map above to display its 6 closest retail outlets & distances';
+  if (grid) grid.style.display = 'none';
+  if (emptyState) emptyState.style.display = 'block';
+  S.currentNearestTarget = null;
+}
+
+window.focusNearestSection = function() {
+  const el = document.getElementById('nearest-sites-wrap');
+  if (el) {
+    el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+};
+
+window.focusNearestOnMap = function(slNo, lat, lng) {
+  const mapWrap = document.querySelector('.map-wrap');
+  if (mapWrap) {
+    mapWrap.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
+  if (S.map) {
+    S.map.flyTo([lat, lng], 14, { animate: true, duration: 0.9 });
+    setTimeout(() => {
+      const mk = S.markerMap.get(slNo);
+      if (mk) {
+        mk.openPopup();
+        const r = S.all.find(x => x.slNo === slNo);
+        if (r) showNearestSites(r);
+      }
+    }, 1000);
+  }
 };
 
 // CHARTS

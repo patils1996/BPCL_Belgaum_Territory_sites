@@ -1,4 +1,4 @@
-const CACHE_NAME = 'clr-bpcl-portal-v3';
+const CACHE_NAME = 'clr-bpcl-portal-v4';
 const ASSETS = [
     './',
     './index.html',
