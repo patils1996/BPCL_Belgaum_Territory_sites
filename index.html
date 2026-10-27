@@ -937,6 +937,17 @@ tbody tr:hover{background:var(--surface2)}
 .nearest-tooltip{background:var(--surface)!important;color:var(--text)!important;border:1px solid var(--border)!important;border-radius:6px!important;padding:4px 8px!important;font-family:'Plus Jakarta Sans',sans-serif!important;font-size:11px!important;box-shadow:var(--shadow-m)!important}
 .nearest-tooltip strong{color:var(--blue)}
 
+/* USER GPS LOCATION STYLES */
+.btn-locate{display:inline-flex;align-items:center;gap:6px;padding:6px 13px;border-radius:var(--radius-s);border:1px solid var(--border);background:var(--surface2);color:var(--blue);font-size:12px;font-weight:700;cursor:pointer;transition:all .15s ease}
+.btn-locate:hover{background:var(--blue);color:#fff;border-color:var(--blue);box-shadow:0 2px 8px rgba(0,84,166,.3)}
+.btn-locate.locating{opacity:.7;pointer-events:none}
+.user-gps-pulse{position:relative;width:28px;height:28px;display:flex;align-items:center;justify-content:center}
+.user-gps-core{width:14px;height:14px;background:#2563eb;border:3px solid #ffffff;border-radius:50%;box-shadow:0 2px 8px rgba(0,0,0,.4);position:relative;z-index:2}
+.user-gps-ring{position:absolute;inset:0;border-radius:50%;background:rgba(37,99,235,.4);animation:gpsPulse 2s infinite ease-out;z-index:1}
+@keyframes gpsPulse{0%{transform:scale(0.6);opacity:1}100%{transform:scale(2.3);opacity:0}}
+.leaflet-control-locate-btn{display:flex!important;align-items:center;justify-content:center;background:#fff!important;cursor:pointer}
+[data-theme="dark"] .leaflet-control-locate-btn{background:#0f1a2e!important;color:#fff!important}
+
 /* SALES TRENDS PANEL */
 .trend-toolbar{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}
 .trend-toolbar .sub{font-size:11.5px;color:var(--text2)}
@@ -1360,7 +1371,16 @@ tbody tr:hover{background:var(--surface2)}
 
     <section class="panel" id="p-map">
       <div class="map-wrap">
-        <div class="map-head"><h2>Geographical Distribution</h2><span id="map-counter">Loading…</span></div>
+        <div class="map-head">
+          <h2>Geographical Distribution</h2>
+          <div style="display:flex;align-items:center;gap:12px;">
+            <button class="btn-locate" id="btn-my-location" onclick="locateUser(true)" title="Center on my current GPS location">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="13" height="13"><circle cx="12" cy="12" r="3"/><path d="M12 2v3m0 14v3M2 12h3m14 0h3"/><circle cx="12" cy="12" r="7"/></svg>
+              <span>My Location</span>
+            </button>
+            <span id="map-counter">Loading…</span>
+          </div>
+        </div>
         <div id="map-el"></div>
         <div class="map-legend">
           <div class="legend-item"><div class="legend-dot" style="background:#0054A6"></div>CC Outlet</div>
@@ -7943,6 +7963,27 @@ function initMap(){
   gRoad.addTo(S.map);
   L.control.layers({'Google Map':gRoad,'Google Satellite':gSatellite,'Google Terrain':gTerrain},null,{position:'topright'}).addTo(S.map);
   S.markerLayer=L.layerGroup().addTo(S.map);
+  S.userLocationLayer=L.layerGroup().addTo(S.map);
+
+  // Add GPS locate control button on map (below zoom +/-)
+  const locateCtrl = L.control({ position: 'topleft' });
+  locateCtrl.onAdd = function() {
+    const container = L.DomUtil.create('div', 'leaflet-bar leaflet-control');
+    const a = L.DomUtil.create('a', 'leaflet-control-locate-btn', container);
+    a.href = '#';
+    a.title = 'Find My Location (GPS)';
+    a.setAttribute('role', 'button');
+    a.setAttribute('aria-label', 'Find My Location (GPS)');
+    a.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" width="16" height="16" style="margin-top:7px;color:#0054A6;"><circle cx="12" cy="12" r="3"/><path d="M12 2v3m0 14v3M2 12h3m14 0h3"/><circle cx="12" cy="12" r="7"/></svg>`;
+    L.DomEvent.disableClickPropagation(container);
+    L.DomEvent.on(a, 'click', (e) => {
+      L.DomEvent.preventDefault(e);
+      locateUser(true);
+    });
+    return container;
+  };
+  locateCtrl.addTo(S.map);
+
   updateMarkers();
 }
 function pinIcon(color){
@@ -7969,10 +8010,123 @@ window.flyTo=function(slNo,lat,lng){
     const mk=S.markerMap.get(slNo);
     if(mk){
       mk.openPopup();
-      const r=S.all.find(x=>x.slNo===slNo);
-      if(r)showNearestSites(r);
     }
   },1400);
+};
+
+// ── USER GPS GEOLOCATION ──
+window.locateUser = function(panTo) {
+  if (panTo === undefined) panTo = true;
+  if (!navigator.geolocation) {
+    alert('Geolocation is not supported by your browser.');
+    return;
+  }
+  
+  const locateBtn = document.getElementById('btn-my-location');
+  if (locateBtn) {
+    locateBtn.classList.add('locating');
+    const span = locateBtn.querySelector('span');
+    if (span) span.textContent = 'Locating…';
+  }
+  
+  navigator.geolocation.getCurrentPosition(
+    (pos) => {
+      if (locateBtn) {
+        locateBtn.classList.remove('locating');
+        const span = locateBtn.querySelector('span');
+        if (span) span.textContent = 'My Location';
+      }
+      
+      const lat = pos.coords.latitude;
+      const lng = pos.coords.longitude;
+      const accuracy = pos.coords.accuracy || 30;
+      
+      S.userLocation = { lat, lng, accuracy };
+      
+      if (!S.userLocationLayer) {
+        S.userLocationLayer = L.layerGroup().addTo(S.map);
+      }
+      S.userLocationLayer.clearLayers();
+      
+      // Accuracy circle
+      const accCircle = L.circle([lat, lng], {
+        radius: Math.max(accuracy, 25),
+        color: '#2563eb',
+        fillColor: '#3b82f6',
+        fillOpacity: 0.15,
+        weight: 1.5,
+        dashArray: '4, 4'
+      });
+      
+      // Pulsing user icon
+      const userIcon = L.divIcon({
+        className: 'leaflet-user-marker',
+        html: `
+          <div class="user-gps-pulse">
+            <div class="user-gps-core"></div>
+            <div class="user-gps-ring"></div>
+          </div>
+        `,
+        iconSize: [28, 28],
+        iconAnchor: [14, 14],
+        popupAnchor: [0, -14]
+      });
+      
+      const userMarker = L.marker([lat, lng], { icon: userIcon, zIndexOffset: 1000 });
+      
+      // Calculate closest outlet to user
+      const nearestToMe = getNearestSites({ latitude: lat, longitude: lng, slNo: -9999 }, 1);
+      const closest = nearestToMe.length ? nearestToMe[0] : null;
+      
+      userMarker.bindPopup(`
+        <div class="pop-hd" style="background:linear-gradient(135deg, #1d4ed8, #2563eb);">
+          <h3 style="color:#fff;">📍 Your Current Location</h3>
+          <span class="pop-type" style="background:rgba(255,255,255,0.25);">GPS Active • &plusmn;${Math.round(accuracy)}m</span>
+        </div>
+        <div class="pop-body">
+          <div class="pop-row">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="13" height="13"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg>
+            <span class="pop-label">GPS:</span>
+            <span class="pop-val">${lat.toFixed(5)}, ${lng.toFixed(5)}</span>
+          </div>
+          ${closest ? `
+          <div style="background:color-mix(in srgb,var(--blue) 8%,transparent);border:1px solid var(--border);border-radius:8px;padding:9px 12px;margin-top:4px;">
+            <div style="font-size:10px;font-weight:700;text-transform:uppercase;color:var(--text3);letter-spacing:0.5px;">Closest BPCL Outlet</div>
+            <div style="font-size:12.5px;font-weight:800;color:var(--text);margin:2px 0;">${escapeHtml(closest.outlet.outletName)}</div>
+            <div style="font-size:11.5px;font-weight:700;color:var(--blue);">📍 ${formatDist(closest.distance)} away</div>
+          </div>
+          ` : ''}
+        </div>
+        <div class="pop-ft" style="padding:10px 14px;">
+          <button onclick="openNearestModal({outletName:'My Location',type:'GPS',ccNumber:'Live GPS',latitude:${lat},longitude:${lng},slNo:-9999})" style="width:100%;padding:8px 12px;border:none;border-radius:6px;background:var(--blue);color:#fff;font-size:11.5px;font-weight:700;display:flex;align-items:center;justify-content:center;gap:6px;cursor:pointer;box-shadow:0 2px 6px rgba(0,84,166,0.3);">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="13" height="13"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg>
+            Find 6 Nearest Outlets to Me
+          </button>
+        </div>
+      `, { maxWidth: 300, closeButton: false });
+      
+      S.userLocationLayer.addLayer(accCircle);
+      S.userLocationLayer.addLayer(userMarker);
+      
+      if (panTo && S.map) {
+        S.map.flyTo([lat, lng], 14, { animate: true, duration: 1 });
+        setTimeout(() => userMarker.openPopup(), 1100);
+      }
+    },
+    (err) => {
+      if (locateBtn) {
+        locateBtn.classList.remove('locating');
+        const span = locateBtn.querySelector('span');
+        if (span) span.textContent = 'My Location';
+      }
+      let msg = 'Could not retrieve your location.';
+      if (err.code === 1) msg = 'Location access was denied. Please allow location permissions in your browser settings to see where you are.';
+      else if (err.code === 2) msg = 'Location coordinates are unavailable. Please check your device GPS.';
+      else if (err.code === 3) msg = 'Location request timed out. Please try again.';
+      alert(msg);
+    },
+    { enableHighAccuracy: true, timeout: 10000, maximumAge: 30000 }
+  );
 };
 
 // ── NEAREST 6 SITES MODAL LOGIC ──
@@ -8020,8 +8174,13 @@ function getNearestSites(target, count) {
   return list.slice(0, count);
 }
 
-window.openNearestModal = function(slNo) {
-  const target = S.all.find(x => x.slNo === slNo) || dealersData.find(x => x.slNo === slNo);
+window.openNearestModal = function(slNoOrTarget) {
+  let target;
+  if (typeof slNoOrTarget === 'object' && slNoOrTarget !== null) {
+    target = slNoOrTarget;
+  } else {
+    target = S.all.find(x => x.slNo === slNoOrTarget) || dealersData.find(x => x.slNo === slNoOrTarget);
+  }
   if (!target) return;
   
   S.currentNearestTarget = target;
@@ -8035,13 +8194,17 @@ window.openNearestModal = function(slNo) {
   
   const nearest = getNearestSites(target, 6);
   if (!nearest.length) {
-    alert('Location coordinates not available for this outlet.');
+    alert('Location coordinates not available.');
     return;
   }
   
   // Update header
   if (originPill) {
-    originPill.innerHTML = `From: <strong>${escapeHtml(target.outletName)}</strong> <span style="opacity:0.75">(${target.type} • CC: ${target.ccNumber})</span>`;
+    if (target.type === 'GPS') {
+      originPill.innerHTML = `📍 <strong>My Current GPS Location</strong>`;
+    } else {
+      originPill.innerHTML = `From: <strong>${escapeHtml(target.outletName)}</strong> <span style="opacity:0.75">(${target.type} • CC: ${target.ccNumber})</span>`;
+    }
   }
   if (subtitle) {
     subtitle.innerHTML = `Showing the <strong>6 closest retail outlets</strong> to <strong>${escapeHtml(target.outletName)}</strong>. Closest is <strong>${formatDist(nearest[0].distance)}</strong> away.`;
